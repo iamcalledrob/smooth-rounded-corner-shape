@@ -16,7 +16,7 @@ repositories {
 kotlin {
     jvmToolchain(17)
 
-    jvm("desktop")
+    jvm()
 
     androidTarget {
         publishLibraryVariants("release", "debug")
