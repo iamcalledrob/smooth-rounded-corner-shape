@@ -13,13 +13,6 @@ repositories {
     google()
 }
 
-buildscript {
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.2.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.23")
-    }
-}
-
 kotlin {
     jvmToolchain(17)
 
@@ -45,11 +38,6 @@ kotlin {
 android {
     namespace = "com.github.iamcalledrob.smoothRoundedCornerShape"
     compileSdk = 34
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }
 
 publishing {
