@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.github.iamcalledrob"
-version = "1.0.2"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -40,10 +40,11 @@ android {
     compileSdk = 34
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["kotlin"])
-        }
-    }
-}
+//publishing {
+//    publications {
+////        create<MavenPublication>("maven2") {
+////            from(components["kotlin"])
+//////            artifactId = "smooth-rounded-corner-shape"
+////        }
+//    }
+//}
