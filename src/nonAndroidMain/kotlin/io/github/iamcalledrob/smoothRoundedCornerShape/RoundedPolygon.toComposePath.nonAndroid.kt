@@ -1,4 +1,4 @@
-package com.github.iamcalledrob.smoothRoundedCornerShape
+package io.github.iamcalledrob.smoothRoundedCornerShape
 
 import androidx.compose.ui.graphics.Path
 import androidx.graphics.shapes.Cubic
@@ -7,6 +7,9 @@ import androidx.graphics.shapes.RoundedPolygon
 actual fun RoundedPolygon.toComposePath() =
     Path().apply { pathFromCubics(this, cubics) }
 
+
+// Code from androidx.graphics.shapes.RoundedPolygon.toPath, which is only available for the Android
+// target -- and returns an Android Path rather than a Compose Path.
 
 private fun pathFromCubics(path: Path, cubics: List<Cubic>) {
     var first = true

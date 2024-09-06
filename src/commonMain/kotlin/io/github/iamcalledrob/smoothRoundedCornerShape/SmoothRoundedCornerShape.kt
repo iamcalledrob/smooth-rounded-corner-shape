@@ -1,13 +1,12 @@
-package com.github.iamcalledrob.smoothRoundedCornerShape
+package io.github.iamcalledrob.smoothRoundedCornerShape
 
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.graphics.shapes.CornerRounding
-import androidx.graphics.shapes.RoundedPolygon
 
 class SmoothRoundedCornerShape(
     val smoothing: Float = DefaultSmoothing,
@@ -21,7 +20,6 @@ class SmoothRoundedCornerShape(
     bottomEnd = bottomEnd,
     bottomStart = bottomStart,
 ) {
-
     constructor(smoothing: Float = DefaultSmoothing, radius: Dp) : this(smoothing, CornerSize(radius))
     constructor(smoothing: Float = DefaultSmoothing, percent: Int) : this(smoothing, CornerSize(percent))
     constructor(smoothing: Float = DefaultSmoothing, corner: CornerSize) : this(
@@ -29,7 +27,35 @@ class SmoothRoundedCornerShape(
         topStart = corner,
         topEnd = corner,
         bottomEnd = corner,
-        bottomStart = corner
+        bottomStart = corner,
+    )
+
+    constructor(
+        smoothing: Float = DefaultSmoothing,
+        topStart: Dp,
+        topEnd: Dp,
+        bottomEnd: Dp,
+        bottomStart: Dp,
+    ) : this(
+        smoothing = smoothing,
+        topStart = CornerSize(topStart),
+        topEnd = CornerSize(topEnd),
+        bottomEnd = CornerSize(bottomEnd),
+        bottomStart = CornerSize(bottomStart),
+    )
+
+    constructor(
+        smoothing: Float = DefaultSmoothing,
+        topStartPercent: Int,
+        topEndPercent: Int,
+        bottomEndPercent: Int,
+        bottomStartPercent: Int,
+    ) : this(
+        smoothing = smoothing,
+        topStart = CornerSize(topStartPercent),
+        topEnd = CornerSize(topEndPercent),
+        bottomEnd = CornerSize(bottomEndPercent),
+        bottomStart = CornerSize(bottomStartPercent),
     )
 
     override fun copy(
@@ -58,25 +84,18 @@ class SmoothRoundedCornerShape(
         val bottomLeft = if (layoutDirection == LayoutDirection.Ltr) bottomStart else bottomEnd
         val bottomRight = if (layoutDirection == LayoutDirection.Ltr) bottomEnd else bottomStart
 
-        val polygon = RoundedPolygon(
-            vertices = floatArrayOf(
-                0f, 0f,                     // topLeft
-                size.width, 0f,             // topRight
-                size.width, size.height,    // bottomRight
-                0f, size.height             // bottomLeft
-            ),
-            perVertexRounding = listOf(
-                CornerRounding(radius = topLeft, smoothing = smoothing),
-                CornerRounding(radius = topRight, smoothing = smoothing),
-                CornerRounding(radius = bottomRight, smoothing = smoothing),
-                CornerRounding(radius = bottomLeft, smoothing = smoothing),
-            )
+        val path = Path.smoothRoundedRectangle(
+            smoothing = smoothing,
+            size = size,
+            topLeft = topLeft,
+            topRight = topRight,
+            bottomRight = bottomRight,
+            bottomLeft = bottomLeft,
         )
-
-        return Outline.Generic(polygon.toComposePath())
+        return Outline.Generic(path)
     }
 }
 
+/** Matches the "iOS" notch (60%) in Figma */
 const val DefaultSmoothing = 0.6f
-
 

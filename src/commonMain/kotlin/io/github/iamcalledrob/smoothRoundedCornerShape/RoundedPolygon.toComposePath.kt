@@ -1,4 +1,4 @@
-package com.github.iamcalledrob.smoothRoundedCornerShape
+package io.github.iamcalledrob.smoothRoundedCornerShape
 
 import androidx.compose.ui.graphics.Path
 import androidx.graphics.shapes.RoundedPolygon
