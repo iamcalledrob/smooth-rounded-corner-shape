@@ -12,6 +12,17 @@ The `smoothing` value approximately maps to Figma's corner smoothing setting as 
 There is no path/smoothing logic contained in this library, it's just a lightweight wrapper around
 [androidx.graphics.shapes](https://developer.android.com/reference/kotlin/androidx/graphics/shapes/package-summary), which is a non-compose library.
 
+## What is a smoothed corner?
+A smoothed (superellipse) corner is a shape with no point where the corner ends and the straight side begins.
+You'll see this kind of shape everywhere in iOS, as well as in physical products, as its more aesthetically
+pleasing than a naive corner radius, which can appear to have a harsh transition from corner to edge.
+![squircle](https://raw.githubusercontent.com/phamfoo/react-native-figma-squircle/b0c25e42c3d1f9e776ce3e315b8e33f7438ff803/demo.png)
+(image from react-native-figma-squircle)
+
+Figma's Daniel Furse [explains the concept and the math in some extreme detail](https://www.figma.com/blog/desperately-seeking-squircles/)
+
+
+
 ## Installation
 Ensure your project is using the maven central repository:
 ```kotlin
