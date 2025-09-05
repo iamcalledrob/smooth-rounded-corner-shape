@@ -22,6 +22,7 @@ out/
 .settings
 .springBeans
 .sts4-cache
+.kotlin
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
